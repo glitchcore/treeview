@@ -59,9 +59,10 @@ function Treeview(tree, canvas, params) {
 	
 	/* recursive tree traversal */
 	function splitDiapasons(diapason, count, params) {
-		var res = []; 
-		var step = (diapason[1] - diapason[0])/count;
+		if (count == 0) return [diapason[0] + params.margin, diapason[1] - params.margin];
 		
+		var step = (diapason[1] - diapason[0])/count;
+		var res = [];
 		for(var x = diapason[0] + step; x <= diapason[1]; x += step) {
 			res.push([
 				x - step + params.margin,
@@ -73,7 +74,16 @@ function Treeview(tree, canvas, params) {
 	/* test for tree function */
 	console.log(splitDiapasons([0,50], 2, params.tree));
 	
-	tree.childs.forEach(function(child) {
-		
-	});
+	function centerDiapason(diapason) {
+		return Math.abs(diapason[1] - diapason[0])/2;
+	}
+	
+	function traversal(tree, level, xDiapason) {
+		console.log(centerDiapason(xDiapason), level, tree.value);
+		var diapasons = splitDiapasons(xDiapason, tree.childs.length, params.tree)
+		tree.childs.forEach(function(child, idx) {
+			traversal(child, level + 1, diapasons[idx]);
+		});
+	}
+	traversal(tree, 0, [0,100]);
 }
