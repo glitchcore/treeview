@@ -78,12 +78,13 @@ function Treeview(tree, canvas, params) {
 		return Math.abs(diapason[1] - diapason[0])/2;
 	}
 	
-	function traversal(tree, level, xDiapason) {
-		console.log(centerDiapason(xDiapason), level, tree.value);
-		var diapasons = splitDiapasons(xDiapason, tree.childs.length, params.tree)
+	function traversal(tree, y, xDiapason, params) {
+		console.log("x:" + centerDiapason(xDiapason), "y:" + y, tree.value);
+		// debugger;
+		var diapasons = splitDiapasons(xDiapason, tree.childs.length, params)
 		tree.childs.forEach(function(child, idx) {
-			traversal(child, level + 1, diapasons[idx]);
+			traversal(child, y + params.height, diapasons[idx], params);
 		});
 	}
-	traversal(tree, 0, [0,100]);
+	traversal(tree, params.marginTop, [0 + params.marginLeft, 100 - params.marginRight], params.tree);
 }
