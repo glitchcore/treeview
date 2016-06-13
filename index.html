@@ -21,7 +21,20 @@
 				]
 			};
 			var parameters = {
-			
+				edge: {
+					color: "#999999",
+					thickness: 1
+				},
+				node: {
+					radius: 6,
+					marginRadus: 8,
+					color: "#CC0000",
+					text: {
+						offset: { x:7, y:4 },
+						color: "#999999",
+						size: 3,
+					}
+				}
 			};
 			// find canvas and pass to Treeview(exampleTree, canvas, parameters)
 			var treeCanvas = document.getElementById("forTree");
