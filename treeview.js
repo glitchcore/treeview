@@ -1,38 +1,54 @@
 
-function drawEdge(edge, context, params) {
+function drawEdge(edge, ctx, params) {
 	// get array of nodes and draw a line
+	ctx.strokeStyle = params.color;
+	ctx.lineWidth = params.thickness;
+	ctx.beginPath();
+    ctx.moveTo(edge[0].x, edge[0].y);
+    ctx.lineTo(edge[1].x, edge[1].y);
+	ctx.stroke();
 }
 
 
-function drawNodePoint(node, context, params) {
+function drawNodePoint(node, ctx, params) {
 	// get node.x:node.y and draw a circle
+	ctx.beginPath();
+	ctx.arc(node.x, node.y, params.radius, 0, Math.PI * 2, false);
+	ctx.closePath();
+	
+	ctx.fillStyle = params.color;
+	ctx.fill();
 }
 
-function drawNodeText(node, context, params) {
+function drawNodeText(node, ctx, params) {
 	// get node.value and print to node.x:node.y
+	ctx.font = params.size + "px sans-serif";
+	ctx.textBaseline = "bottom";
+	ctx.fillStyle = params.color;
+	ctx.fillText(node.value, node.x + params.offset.x, node.y - params.offset.y);
 }
 
-function drawNode(node, context, params) {
-	drawNodeText(node, context, params);
-	drawNodePoint(node, context, params);
+function drawNode(node, ctx, params) {
+	drawNodeText(node, ctx, params.text);
+	drawNodePoint(node, ctx, params);
 }
 
 function Treeview(tree, canvas, params) {
-	// get context
+	// get ctx
 	var ctx = canvas.getContext("2d");
 	
 	// apply width and height of canvas
 	ctx.width = canvas.width;
 	ctx.height = canvas.height;
 	
-	// value in percentage of context height
+	// value in percentage of ctx height
 	ctx.hp = function(percent) { return (percent/100) * this.height; }
 	
-	// value in percentage of context width
+	// value in percentage of ctx width
 	ctx.wp = function(percent) { return (percent/100) * this.width; }
 	
 	// value in percentage of context size
-	ctx.sp = function(percent) { return (percent/100) * Math.sqrt(this.width*this.width + this.height*this.height); }
+	ctx.sp = function(percent) { return (percent/100) * Math.sqrt((this.width*this.width + this.height*this.height)/2); }
 	
 	function percent2pixel(params) {
 		var res = params;
@@ -41,7 +57,7 @@ function Treeview(tree, canvas, params) {
 		res.node.radius = ctx.sp(params.node.radius);
 		res.node.text.offset.x = ctx.wp(params.node.text.offset.x);
 		res.node.text.offset.y = ctx.hp(params.node.text.offset.y);
-		res.node.text.offset.size = ctx.hp(params.node.text.offset.size);
+		res.node.text.size = ctx.hp(params.node.text.size);
 		return res;
 	}
 	
@@ -78,12 +94,18 @@ function Treeview(tree, canvas, params) {
 		return Math.abs(diapason[1] - diapason[0])/2;
 	}
 	
-	function traversal(tree, y, xDiapason, params) {
-		console.log("x:" + centerDiapason(xDiapason), "y:" + y, tree.value);
+	function traversal(tree, y, xDiapason, treeParams) {
+		var x = centerDiapason(xDiapason);
+		console.log("x:" + x, "y:" + y, tree.value);
+		drawNode({
+			value: tree.value,
+			x:ctx.wp(x), 
+			y:ctx.hp(y)
+		}, ctx, params.node);
 		// debugger;
-		var diapasons = splitDiapasons(xDiapason, tree.childs.length, params)
+		var diapasons = splitDiapasons(xDiapason, tree.childs.length, treeParams)
 		tree.childs.forEach(function(child, idx) {
-			traversal(child, y + params.height, diapasons[idx], params);
+			traversal(child, y + treeParams.height, diapasons[idx], treeParams);
 		});
 	}
 	traversal(tree, params.marginTop, [0 + params.marginLeft, 100 - params.marginRight], params.tree);
