@@ -1,6 +1,6 @@
 
 function drawEdge(edge, context, params) {
-	
+	// get array of points and draw a line
 }
 
 
@@ -32,6 +32,10 @@ function Treewiew(tree, canvas, params) {
 	ctx.wp = function(percent) { return (percent/100) * this.width; }
 	
 	// TASK recursive tree traversal
+	
+	/* test for wp and hp */
+	console.log("50% of width:", ctx.wp(50));
+	console.log("50% of height:", ctx.wp(50));
 	
 	/* test for draw function */
 	var fooNode0 = {value:42, x:ctx.wp(50), y:ctx.hp(50)};
