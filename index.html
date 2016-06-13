@@ -5,7 +5,9 @@
 	</head>
 	<body>
 		<!-- create canvas -->
-		<canvas id="forTree"  width="800" height="800"></canvas>
+		<center>
+			<canvas id="forTree"  width="400" height="400" style="border: 1px solid black"></canvas>
+		</center>
 		<script>
 			var exampleTree = {
 				value: 10,
@@ -28,14 +30,18 @@
 				},
 				node: {
 					radius: 6,
-					
 					color: "#CC0000",
 					text: {
 						offset: { x:7, y:4 },
 						color: "#999999",
 						size: 3,
 					}
-				}
+				},
+				marginTop: 5,
+				marginLeft: 0,
+				marginRight: 0,
+				tree: {
+				}	
 			};
 			// find canvas and pass to Treeview(exampleTree, canvas, parameters)
 			var treeCanvas = document.getElementById("forTree");

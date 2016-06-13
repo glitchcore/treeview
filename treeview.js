@@ -7,13 +7,11 @@ function drawEdge(edge, ctx, params) {
 function drawNodePoint(node, ctx, params) {
 	// get node.x:node.y and draw a circle
 	ctx.beginPath();
-	ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+	ctx.arc(node.x, node.y, params.radius, 0, Math.PI * 2, false);
 	ctx.closePath();
-
-
-
-	ctx.strokeStyle = "#000";
-	ctx.stroke();
+	
+	ctx.fillStyle = params.color;
+	ctx.fill();
 }
 
 function drawNodeText(node, ctx, params) {
@@ -25,9 +23,14 @@ function drawNode(node, ctx, params) {
 	drawNodePoint(node, ctx, params);
 }
 
+function splitDiapasons(diapason, count, params) {
+	var res;
+	return res;
+}
+
 function Treeview(tree, canvas, params) {
 	// get ctx
-	var ctx = canvas.getctx("2d");
+	var ctx = canvas.getContext("2d");
 	
 	// apply width and height of canvas
 	ctx.width = canvas.width;
@@ -39,12 +42,28 @@ function Treeview(tree, canvas, params) {
 	// value in percentage of ctx width
 	ctx.wp = function(percent) { return (percent/100) * this.width; }
 	
+	// value in percentage of context size
+	ctx.sp = function(percent) { return (percent/100) * Math.sqrt((this.width*this.width + this.height*this.height)/2); }
+	
+	function percent2pixel(params) {
+		var res = params;
+		res.edge.thickness = ctx.sp(params.edge.thickness);
+		res.edge.marginRadus = ctx.sp(params.edge.marginRadus);
+		res.node.radius = ctx.sp(params.node.radius);
+		res.node.text.offset.x = ctx.wp(params.node.text.offset.x);
+		res.node.text.offset.y = ctx.hp(params.node.text.offset.y);
+		res.node.text.size = ctx.hp(params.node.text.size);
+		return res;
+	}
+	
 	// TASK recursive tree traversal
 	
 	/* test for wp and hp
 	console.log("50% of width:", ctx.wp(50));
 	console.log("50% of height:", ctx.wp(50));
 	test OK */
+	
+	params = percent2pixel(params);
 	
 	/* test for draw function */
 	var fooNode0 = {value:42, x:ctx.wp(50), y:ctx.hp(50)};
@@ -55,4 +74,7 @@ function Treeview(tree, canvas, params) {
 	drawNode(fooNode2, ctx, params.node);
 	drawEdge([fooNode0,fooNode1], ctx, params.edge);
 	drawEdge([fooNode0,fooNode2], ctx, params.edge);
+	
+	/* test for tree function */
+	splitDiapasons([0,1], 3, params.tree);
 }
