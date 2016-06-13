@@ -42,9 +42,9 @@ function Treeview(tree, canvas, params) {
 	var fooNode0 = {value:42, x:ctx.wp(50), y:ctx.hp(50)};
 	var fooNode1 = {value:14, x:ctx.wp(80), y:ctx.hp(80)};
 	var fooNode2 = {value:88, x:ctx.wp(20), y:ctx.hp(80)};
-	drawNode(fooNode0, ctx, params);
-	drawNode(fooNode1, ctx, params);
-	drawNode(fooNode2, ctx, params);
-	drawEdge([fooNode0,fooNode1], ctx, params);
-	drawEdge([fooNode0,fooNode2], ctx, params);
+	drawNode(fooNode0, ctx, params.node);
+	drawNode(fooNode1, ctx, params.node);
+	drawNode(fooNode2, ctx, params.node);
+	drawEdge([fooNode0,fooNode1], ctx, params.edge);
+	drawEdge([fooNode0,fooNode2], ctx, params.edge);
 }
