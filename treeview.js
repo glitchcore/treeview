@@ -17,19 +17,6 @@ function drawNode(node, context, params) {
 	drawNodePoint(node, context, params);
 }
 
-function splitDiapasons(diapason, count, params) {
-	var res = []; 
-	var step = (diapason[1] - diapason[0])/count;
-	
-	for(var x = diapason[0] + step; x <= diapason[1]; x += step) {
-		res.push([
-			x - step + params.margin,
-			x - params.margin
-		]);
-	}
-	return res;
-}
-
 function Treeview(tree, canvas, params) {
 	// get context
 	var ctx = canvas.getContext("2d");
@@ -58,13 +45,6 @@ function Treeview(tree, canvas, params) {
 		return res;
 	}
 	
-	// TASK recursive tree traversal
-	
-	/* test for wp and hp
-	console.log("50% of width:", ctx.wp(50));
-	console.log("50% of height:", ctx.wp(50));
-	test OK */
-	
 	params = percent2pixel(params);
 	
 	/* test for draw function */
@@ -77,6 +57,19 @@ function Treeview(tree, canvas, params) {
 	drawEdge([fooNode0,fooNode1], ctx, params.edge);
 	drawEdge([fooNode0,fooNode2], ctx, params.edge);
 	
+	/* recursive tree traversal */
+	function splitDiapasons(diapason, count, params) {
+		var res = []; 
+		var step = (diapason[1] - diapason[0])/count;
+		
+		for(var x = diapason[0] + step; x <= diapason[1]; x += step) {
+			res.push([
+				x - step + params.margin,
+				x - params.margin
+			]);
+		}
+		return res;
+	}
 	/* test for tree function */
 	console.log(splitDiapasons([0,50], 2, params.tree));
 }
