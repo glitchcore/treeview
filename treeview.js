@@ -1,6 +1,12 @@
 
 function drawEdge(edge, ctx, params) {
 	// get array of nodes and draw a line
+	ctx.strokeStyle = params.color;
+	ctx.lineWidth = params.thickness;	
+	ctx.beginPath();
+    ctx.moveTo(edge[0].x, edge[0].y);
+    ctx.lineTo(edge[1].x, edge[1].y);
+	ctx.stroke();
 }
 
 
