@@ -1,34 +1,42 @@
 
-function drawEdge(edge, context, params) {
+function drawEdge(edge, ctx, params) {
 	// get array of nodes and draw a line
 }
 
 
-function drawNodePoint(node, context, params) {
+function drawNodePoint(node, ctx, params) {
 	// get node.x:node.y and draw a circle
+	ctx.beginPath();
+	ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+	ctx.closePath();
+
+
+
+	ctx.strokeStyle = "#000";
+	ctx.stroke();
 }
 
-function drawNodeText(node, context, params) {
+function drawNodeText(node, ctx, params) {
 	// get node.value and print to node.x:node.y
 }
 
-function drawNode(node, context, params) {
-	drawNodeText(node, context, params);
-	drawNodePoint(node, context, params);
+function drawNode(node, ctx, params) {
+	drawNodeText(node, ctx, params);
+	drawNodePoint(node, ctx, params);
 }
 
 function Treeview(tree, canvas, params) {
-	// get context
-	var ctx = canvas.getContext("2d");
+	// get ctx
+	var ctx = canvas.getctx("2d");
 	
 	// apply width and height of canvas
 	ctx.width = canvas.width;
 	ctx.height = canvas.height;
 	
-	// value in percentage of context height
+	// value in percentage of ctx height
 	ctx.hp = function(percent) { return (percent/100) * this.height; }
 	
-	// value in percentage of context width
+	// value in percentage of ctx width
 	ctx.wp = function(percent) { return (percent/100) * this.width; }
 	
 	// TASK recursive tree traversal
