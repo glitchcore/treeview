@@ -6,22 +6,69 @@
 	<body>
 		<!-- create canvas -->
 		<center>
-			<canvas id="forTree"  width="600" height="600" style="border: 1px solid black"></canvas>
+			<canvas id="forTree"  width="800" height="600" style="border: 1px solid black"></canvas>
 		</center>
 		<script>
+			var triTree = {
+				value:10,
+				childs: [
+					{
+						value: 1,
+						childs: []
+					},
+					{
+						value: 2,
+						childs: []
+					},
+					{
+						value: 3,
+						childs: [
+							{
+								value: 666,
+								childs: []
+							}
+						]
+					}
+				]
+			};
+			
 			var exampleTree = {
 				value: 10,
 				childs: [
 					{
-						value: 20,
-						childs: []
+						value: "UOOO",
+						childs: [
+							{
+								value: 20,
+								childs: [
+									{
+										value: 20,
+										childs: []
+									},
+									{
+										value: 12,
+										childs: []
+									}
+								]
+							},
+							{
+								value: 12,
+								childs: [
+									{
+										value: 20,
+										childs: []
+									}
+								]
+							}
+						]
 					},
 					{
 						value: 12,
-						childs: []
+						childs: triTree.childs
 					}
 				]
 			};
+			
 			var parameters = {
 				edge: {
 					color: "#999999",
@@ -32,7 +79,7 @@
 					radius: 2,
 					color: "#CC0000",
 					text: {
-						offset: { x:3, y:-1 },
+						offset: { x:3, y:-1.5 },
 						color: "#999999",
 						size: 3,
 					}
@@ -41,7 +88,7 @@
 				marginLeft: 0,
 				marginRight: 0,
 				tree: {
-					margin:5,
+					margin:0,
 					height:20
 				}
 			};

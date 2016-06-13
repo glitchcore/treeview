@@ -64,7 +64,7 @@ function Treeview(tree, canvas, params) {
 	
 	params = percent2pixel(params);
 	
-	/* test for draw function */
+	/* test for draw function 
 	var fooNode0 = {value:42, x:ctx.wp(50), y:ctx.hp(50)};
 	var fooNode1 = {value:14, x:ctx.wp(80), y:ctx.hp(80)};
 	var fooNode2 = {value:88, x:ctx.wp(20), y:ctx.hp(80)};
@@ -73,6 +73,8 @@ function Treeview(tree, canvas, params) {
 	drawNode(fooNode2, ctx, params.node);
 	drawEdge([fooNode0,fooNode1], ctx, params.edge);
 	drawEdge([fooNode0,fooNode2], ctx, params.edge);
+	*/
+	
 	
 	/* recursive tree traversal */
 	function splitDiapasons(diapason, count, params) {
@@ -80,10 +82,10 @@ function Treeview(tree, canvas, params) {
 		
 		var step = (diapason[1] - diapason[0])/count;
 		var res = [];
-		for(var x = diapason[0] + step; x <= diapason[1]; x += step) {
+		for(var i = 0; i < count; i++) {
 			res.push([
-				x - step + params.margin,
-				x - params.margin
+				diapason[0] + step*(i+1) + params.margin,
+				diapason[0] + step*i - params.margin
 			]);
 		}
 		return res;
