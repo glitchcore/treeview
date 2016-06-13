@@ -4,8 +4,9 @@ function drawEdge(edge, ctx, params) {
 	ctx.strokeStyle = params.color;
 	ctx.lineWidth = params.thickness;	
 	ctx.beginPath();
-    ctx.moveTo(edge[0].x, edge[0].y);
-    ctx.lineTo(edge[1].x, edge[1].y);
+	var angle = Math.atan2(edge[1].y - edge[0].y, edge[1].x - edge[0].x);
+    ctx.moveTo(edge[0].x + params.marginRadus * Math.cos(angle), edge[0].y + params.marginRadus * Math.sin(angle));
+    ctx.lineTo(edge[1].x - params.marginRadus * Math.cos(angle), edge[1].y - params.marginRadus * Math.sin(angle));
 	ctx.stroke();
 }
 
