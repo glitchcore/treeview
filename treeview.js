@@ -72,4 +72,8 @@ function Treeview(tree, canvas, params) {
 	}
 	/* test for tree function */
 	console.log(splitDiapasons([0,50], 2, params.tree));
+	
+	tree.childs.forEach(function(child) {
+		
+	});
 }
