@@ -1,30 +1,32 @@
 <html>
 	<head>
-	<!-- add treewiew script -->
-	<!-- 
-	var exampleTree = {
-		value: 10,
-		edges: [
-			{
-				value: 20,
-				edges: []
-			},
-			{
-				value: 12,
-				edges: []
-			}
-		]
-	};
-	var parameters = {
-	
-	};
-	
-	find canvas and pass to Treewiew(exampleTree, canvas, parameters) 
-	-->
-	
+		<!-- add treewiew script -->
+		<script src="treeview.js" type="text/javascript"></script>
 	</head>
-	
 	<body>
 		<!-- create canvas -->
+		<canvas id="forTree"  width="1000" height="1000"></canvas>
+		<script>
+			var exampleTree = {
+				value: 10,
+				edges: [
+					{
+						value: 20,
+						edges: []
+					},
+					{
+						value: 12,
+						edges: []
+					}
+				]
+			};
+			var parameters = {
+			
+			};
+			// find canvas and pass to Treeview(exampleTree, canvas, parameters)
+			var treeCanvas = document.getElementById("forTree");
+			
+			Treeview(exampleTree, treeCanvas, parameters);
+		</script>
 	</body>
 </html>
