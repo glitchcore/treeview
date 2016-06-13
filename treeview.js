@@ -16,10 +16,14 @@ function drawNodePoint(node, ctx, params) {
 
 function drawNodeText(node, ctx, params) {
 	// get node.value and print to node.x:node.y
+	ctx.font = params.size + "px sans-serif";
+	ctx.textBaseline = "bottom";
+	ctx.fillStyle = params.color;
+	ctx.fillText(node.value, node.x + params.offset.x, node.y - params.offset.y);
 }
 
 function drawNode(node, ctx, params) {
-	drawNodeText(node, ctx, params);
+	drawNodeText(node, ctx, params.text);
 	drawNodePoint(node, ctx, params);
 }
 
