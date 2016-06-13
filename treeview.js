@@ -18,10 +18,10 @@ function drawNode(node, context, params) {
 }
 
 function Treeview(tree, canvas, params) {
-	// TASK get context
+	// get context
 	var ctx = canvas.getContext("2d");
 	
-	// TASK apply width and height of canvas
+	// apply width and height of canvas
 	ctx.width = canvas.width;
 	ctx.height = canvas.height;
 	
@@ -33,9 +33,10 @@ function Treeview(tree, canvas, params) {
 	
 	// TASK recursive tree traversal
 	
-	/* test for wp and hp */
+	/* test for wp and hp
 	console.log("50% of width:", ctx.wp(50));
 	console.log("50% of height:", ctx.wp(50));
+	test OK */
 	
 	/* test for draw function */
 	var fooNode0 = {value:42, x:ctx.wp(50), y:ctx.hp(50)};
