@@ -1,20 +1,20 @@
 
 function drawEdge(edge, context, params) {
-	// get array of points and draw a line
+	// get array of nodes and draw a line
 }
 
 
-function drawNodePoint(point, context, params) {
-	// get point.x:point.y and draw a circle
+function drawNodePoint(node, context, params) {
+	// get node.x:node.y and draw a circle
 }
 
-function drawNodeText(point, context, params) {
-	// get point.value and print to point.x:point.y
+function drawNodeText(node, context, params) {
+	// get node.value and print to node.x:node.y
 }
 
-function drawNode(point, context, params) {
-	drawNodeText(point, context, params);
-	drawNodePoint(point, context, params);
+function drawNode(node, context, params) {
+	drawNodeText(node, context, params);
+	drawNodePoint(node, context, params);
 }
 
 function Treeview(tree, canvas, params) {
