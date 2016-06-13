@@ -18,7 +18,15 @@ function drawNode(node, context, params) {
 }
 
 function splitDiapasons(diapason, count, params) {
-	var res;
+	var res = []; 
+	var step = (diapason[1] - diapason[0])/count;
+	
+	for(var x = diapason[0] + step; x <= diapason[1]; x += step) {
+		res.push([
+			x - step + params.margin,
+			x - params.margin
+		]);
+	}
 	return res;
 }
 
@@ -40,7 +48,7 @@ function Treeview(tree, canvas, params) {
 	ctx.sp = function(percent) { return (percent/100) * Math.sqrt(this.width*this.width + this.height*this.height); }
 	
 	function percent2pixel(params) {
-		var res = {};
+		var res = params;
 		res.edge.thickness = ctx.sp(params.edge.thickness);
 		res.edge.marginRadus = ctx.sp(params.edge.marginRadus);
 		res.node.radius = ctx.sp(params.node.radius);
@@ -70,5 +78,5 @@ function Treeview(tree, canvas, params) {
 	drawEdge([fooNode0,fooNode2], ctx, params.edge);
 	
 	/* test for tree function */
-	splitDiapasons([0,1], 3, params.tree);
+	console.log(splitDiapasons([0,50], 2, params.tree));
 }
